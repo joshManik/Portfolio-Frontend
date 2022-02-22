@@ -1,11 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { Component, useEffect, useState} from 'react';
+import axios from 'axios';
 
-function App() {
+
+const MyImage = (props) => {
+
+  const [myImage, setImage] = useState("");
+
+  useEffect(() => {
+    loadDataOnlyOnce();
+  }, [])
+
+  const loadDataOnlyOnce = () => {
+    axios.get('http://localhost:4000/get/table').then(res => {
+      setImage(res.data)
+    })
+    console.log(myImage)
+  }
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={'..\\..\\uploads\\6828454d7b74bca3c81ebb01e9870541'} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -22,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default MyImage;
