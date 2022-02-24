@@ -1,14 +1,5 @@
-FROM node:16.13.0
-
-WORKDIR /app
-
-ENV PATH /app/node_modules/.bin:$PATH
-
-COPY ./frontend/package.json ./
-COPY ./frontend/package-lock.json ./
-
-RUN npm i
-
-COPY ./frontend ./
-# start app
-CMD ["npm", "start"]
+# production environment
+FROM nginx:stable-alpine
+COPY ./frontend/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
